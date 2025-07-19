@@ -19,8 +19,25 @@ Route::middleware('auth')->group(function () {
 
 Route::get('admin', function(){
     return '<h2>haii admin</h2>';
-})->middleware(['auth', 'verified', 'role:admin']);
+})->middleware(['auth', 'verified']);
 
 
 
 require __DIR__.'/auth.php';
+
+
+use App\Http\Controllers\SupplierController;
+
+Route::resource('/suppliers', SupplierController::class);
+
+Route::get('/', function () {
+    return view('welcome');
+});
+ 
+use App\Http\Controllers\ObatController;
+
+Route::resource('/obats', ObatController::class);
+
+Route::get('/', function () {
+    return view('welcome');
+});

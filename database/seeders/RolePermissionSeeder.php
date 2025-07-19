@@ -11,48 +11,40 @@ class RolePermissionSeeder extends Seeder
 {
     public function run(): void
     {
-        // Reset cache permission
+        // Reset permission cache
         app()[PermissionRegistrar::class]->forgetCachedPermissions();
 
-        // Buat daftar permission
+        // Daftar permission yang akan dibuat
         $permissions = [
-            'lihat-obat', 'tambah-obat', 'edit-obat', 'hapus-obat',
-            'stok-masuk', 'stok-keluar', 'lihat-stok',
-            'kelola-kategori', 'kelola-satuan',
-            'lihat-laporan-stok', 'lihat-laporan-transaksi', 'export-laporan',
-            'kelola-user', 'kelola-role', 'atur-permission',
+            'show obat',
+            'tambah obat',
+            'edit obat',
+            'hapus obat',
         ];
 
+        // Buat permission dengan guard_name
         foreach ($permissions as $permission) {
-            Permission::firstOrCreate(['name' => $permission]);
+            Permission::firstOrCreate([
+                'name' => $permission,
+                'guard_name' => 'web',
+            ]);
         }
 
-        // Buat role
-        $admin = Role::firstOrCreate(['name' => 'admin']);
-        $petugas = Role::firstOrCreate(['name' => 'Petugasgudang']);
-        $apoteker = Role::firstOrCreate(['name' => 'apoteker']);
-        $manajer = Role::firstOrCreate(['name' => 'manajer']);
-        $kasir = Role::firstOrCreate(['name' => 'kasir']);
+        // Buat role dengan guard_name 'web'
+        $admin    = Role::firstOrCreate(['name' => 'admin', 'guard_name' => 'web']);
+        $petugas  = Role::firstOrCreate(['name' => 'Petugasgudang', 'guard_name' => 'web']);
+        $apoteker = Role::firstOrCreate(['name' => 'apoteker', 'guard_name' => 'web']);
+        $manajer  = Role::firstOrCreate(['name' => 'manajer', 'guard_name' => 'web']);
+        $kasir    = Role::firstOrCreate(['name' => 'kasir', 'guard_name' => 'web']);
 
-        // Assign permission ke masing-masing role
+        // Assign permission ke role admin
         $admin->syncPermissions($permissions);
 
+        // Assign permission khusus ke Petugasgudang
         $petugas->syncPermissions([
-            'lihat-obat', 'tambah-obat', 'edit-obat',
-            'stok-masuk', 'stok-keluar', 'lihat-stok',
-            'kelola-kategori', 'kelola-satuan'
-        ]);
-
-        $apoteker->syncPermissions([
-            'lihat-obat', 'lihat-stok', 'lihat-laporan-stok', 'lihat-laporan-transaksi'
-        ]);
-
-        $manajer->syncPermissions([
-            'lihat-laporan-stok', 'lihat-laporan-transaksi', 'export-laporan'
-        ]);
-
-        $kasir->syncPermissions([
-            'stok-keluar', 'lihat-obat', 'lihat-stok'
+            'show obat',
+            'tambah obat',
+            'edit obat',
         ]);
     }
 }

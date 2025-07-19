@@ -15,10 +15,11 @@ class Supplier extends Model
      * @var array
      */
     protected $fillable = [
-        'image',
-        'title',
-        'description',
-        'price',
-        'stock',
+        'nama',
+        'alamat',
+        'telepon',
+        'email',
     ];
+
+    
 }

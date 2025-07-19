@@ -68,7 +68,7 @@
 
     <script>
         //message with sweetalert
-        @if(session('success'))
+        if(session('success'))
             Swal.fire({
                 icon: "success",
                 title: "BERHASIL",
@@ -76,7 +76,7 @@
                 showConfirmButton: false,
                 timer: 2000
             });
-        @elseif(session('error'))
+        elseif(session('error'))
             Swal.fire({
                 icon: "error",
                 title: "GAGAL!",
@@ -84,7 +84,7 @@
                 showConfirmButton: false,
                 timer: 2000
             });
-        @endif
+        endif
 
     </script>
 

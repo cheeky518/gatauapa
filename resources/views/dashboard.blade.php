@@ -14,4 +14,14 @@
             </div>
         </div>
     </div>
+
+    <div class="mt-4">
+    @hasanyrole('admin|Petugasgudang')
+        <a href="{{ route('obats.index') }}" class="btn btn-outline-primary btn-sm">
+            🔍 Lihat Data Obat
+        </a>
+    @endhasanyrole
+
+</div>
+
 </x-app-layout>
