@@ -19,7 +19,9 @@
                 </div>
                 <div class="card border-0 shadow-sm rounded">
                     <div class="card-body">
-                        <a href="{{ route('obats.create') }}" class="btn btn-md btn-success mb-3">ADD obat</a>
+                       @can('tambah obat')
+                            <a href="{{ route('obats.create') }}" class="btn btn-md btn-success mb-3">ADD obat</a>
+                       @endcan
                         <table class="table table-bordered">
                             <thead>
                                 <tr>
@@ -42,17 +44,26 @@
                                             <td>{{ $obat->stock }}</td>
                                             <td>{{ $obat->expired_at }}</td>
 
-                                        <td class="text-center">
+                                       <td class="text-center">
                                             <form onsubmit="return confirm('Apakah Anda Yakin ?');" action="{{ route('obats.destroy', $obat->id) }}" method="POST">
-                                                <a href="{{ route('obats.show', $obat->id) }}" class="btn btn-sm btn-dark">SHOW</a>
-                                                <a href="{{ route('obats.edit', $obat->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                                @can('show obat')
+                                                    <a href="{{ route('obats.show', $obat->id) }}" class="btn btn-sm btn-dark">SHOW</a>
+                                                @endcan
+
+                                                @can('edit obat')
+                                                    <a href="{{ route('obats.edit', $obat->id) }}" class="btn btn-sm btn-primary">EDIT</a>
+                                                @endcan
+
                                                 @csrf
                                                 @method('DELETE')
-                                                <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+
+                                                @can('hapus obat')
+                                                    <button type="submit" class="btn btn-sm btn-danger">HAPUS</button>
+                                                @endcan
                                             </form>
                                         </td>
                                     </tr>
-                                @empty
+                                    @empty
                                     <div class="alert alert-danger">
                                         Data obats belum ada.
                                     </div>

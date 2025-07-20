@@ -12,6 +12,9 @@ class User extends Authenticatable
 {
     /** @use HasFactory<\Database\Factories\UserFactory> */
     use HasFactory, Notifiable, HasRoles;
+    /**
+     * @method bool hasRole(string $role)
+     */
 
     /**
      * The attributes that are mass assignable.

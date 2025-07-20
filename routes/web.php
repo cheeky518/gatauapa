@@ -17,14 +17,15 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('admin', function(){
-    return '<h2>haii admin</h2>';
-})->middleware(['auth', 'verified']);
+Route::get('admin', function () {
+    return view('obats.index');
+})->middleware(['auth', 'verified', 'role_or_permission:admin|show obat|edit obat|tambah obat|hapus obat'])->name('admin.dashboard');//nama()buat panggilan biar bisa dipanggil
 
-
+Route::get('petugasgudang', function () {
+    return view('obats.index');
+})->middleware(['auth', 'verified', 'role_or_permission:Petugasgudang'])->name('petugasgudang.dashboard');
 
 require __DIR__.'/auth.php';
-
 
 use App\Http\Controllers\SupplierController;
 

@@ -17,7 +17,6 @@ use Illuminate\Http\Request;
 //import Facades Storage
 use Illuminate\Support\Facades\Storage;
 
-
 class ObatController extends Controller
 {
     /**
@@ -27,10 +26,11 @@ class ObatController extends Controller
      */
     public function index() : View
     {
-        //get all obats
+
+        //get all obat
         $obats = Obat::latest()->paginate(10);
 
-        //render view with obats
+        //render view with obat
         return view('obats.index', compact('obats'));
     }
 
@@ -115,6 +115,7 @@ class ObatController extends Controller
      */
     public function update(Request $request, $id): RedirectResponse
     {
+
         //validate form
         $request->validate([
            'nama_obat'      => 'required|min:3',

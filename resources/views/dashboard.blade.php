@@ -11,17 +11,11 @@
                 <div class="p-6 text-gray-900 dark:text-gray-100">
                     {{ __("You're logged in!") }}
                 </div>
+                <a href="{{ route('obats.index') }}" class="btn btn-primary mt-3">
+                    💊 Lihat Data Obat
+                </a>
             </div>
         </div>
     </div>
-
-    <div class="mt-4">
-    @hasanyrole('admin|Petugasgudang')
-        <a href="{{ route('obats.index') }}" class="btn btn-outline-primary btn-sm">
-            🔍 Lihat Data Obat
-        </a>
-    @endhasanyrole
-
-</div>
 
 </x-app-layout>

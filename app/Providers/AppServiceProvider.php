@@ -3,6 +3,7 @@
 namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
+use Spatie\Permission\Exceptions\UnauthorizedException;
 
 class AppServiceProvider extends ServiceProvider
 {
